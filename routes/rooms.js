@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { createRoom, updateRoom, deleteRoom, getRoom, getAllRooms } = require("../controller/Room");
+const { createRoom, updateRoom, deleteRoom, getRoom, getAllRooms } = require("../controller/room");
 const { verifyAdmin } = require('../utils/verifyToken');
 
 // C
