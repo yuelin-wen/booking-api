@@ -2,6 +2,10 @@ const express = require('express')
 const dotenv = require("dotenv");
 const mongoose = require("mongoose")
 const cookieParser = require("cookie-parser");
+const authRoute = require('./routes/auth');
+const usersRoute = require('./routes/users');
+const hotelsRoute = require('./routes/hotels');
+const roomsRoute = require('./routes/rooms');
 var cors = require('cors')
 
 const app =express();
@@ -46,6 +50,11 @@ app.use((req, res) => {
         },
     });
 });
+
+app.use("/api/auth", authRoute);
+app.use("/api/users", usersRoute);
+app.use("/api/hotels", hotelsRoute);
+app.use("/api/rooms", roomsRoute);
 
 app.listen(8080,()=>{
     connect()
