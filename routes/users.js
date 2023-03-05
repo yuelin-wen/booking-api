@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { updateUser, deleteUser, getUser, getAllUsers } = require("../controller/User");
+const { updateUser, deleteUser, getUser, getAllUsers } = require("../controller/user");
 const { verifyToken, verifyUser, verifyAdmin } = require('../utils/verifyToken');
 
 // check authentication
