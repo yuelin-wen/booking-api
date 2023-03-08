@@ -40,6 +40,11 @@ app.get('/', (req, res) => {
     });
 });
 
+app.use("/api/auth", authRoute);
+app.use("/api/users", usersRoute);
+app.use("/api/hotels", hotelsRoute);
+app.use("/api/rooms", roomsRoute);
+
 // Add 404 middleware to handle any requests for resources that can't be found
 app.use((req, res) => {
     res.status(404).json({
@@ -50,12 +55,6 @@ app.use((req, res) => {
         },
     });
 });
-
-app.use("/api/auth", authRoute);
-app.use("/api/users", usersRoute);
-app.use("/api/hotels", hotelsRoute);
-app.use("/api/rooms", roomsRoute);
-
 app.listen(8080,()=>{
     connect()
     console.log("API listening")
