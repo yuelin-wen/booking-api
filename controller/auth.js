@@ -2,7 +2,7 @@ let User = require('../models/User')
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
-const register = async (req, res, next) => {
+module.exports.register = async (req, res, next) => {
     try {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password, salt);
@@ -20,7 +20,7 @@ const register = async (req, res, next) => {
     }
 }
 
-const login = async (req, res, next) => {
+module.exports.login = async (req, res, next) => {
     try {
         const user = await User.findOne({ username: req.body.username });
         !user && res.status(400).json("Wrong credentials!");
@@ -37,4 +37,3 @@ const login = async (req, res, next) => {
     }
 }
 
-module.exports = { register, login }

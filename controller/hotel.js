@@ -1,6 +1,6 @@
 const Hotel = require("../models/Hotel")
 
-const createHotel = async (req, res, next) => {
+module.exports.createHotel = async (req, res, next) => {
     async (req, res) => {
         const newHotel = new Hotel(req.body)
         try {
@@ -12,7 +12,7 @@ const createHotel = async (req, res, next) => {
     }
 }
 
-const updateHotel = async (req, res) => {
+module.exports.updateHotel = async (req, res) => {
     try {
         const updatedHotel = await Hotel.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
         res.status(200).json(updatedHotel)
@@ -21,7 +21,7 @@ const updateHotel = async (req, res) => {
     }
 }
 
-const deleteHotel = async (req, res) => {
+module.exports.deleteHotel = async (req, res) => {
     try {
         await Hotel.findByIdAndDelete(req.params.id)
         res.status(200).json("deleted hotel")
@@ -30,7 +30,7 @@ const deleteHotel = async (req, res) => {
     }
 }
 
-const getHotel = async (req, res) => {
+module.exports.getHotel = async (req, res) => {
     try {
         const hotel = await Hotel.findById(req.params.id)
         res.status(200).json(hotel)
@@ -39,7 +39,7 @@ const getHotel = async (req, res) => {
     }
 }
 
-const getAllHotels = async (req, res) => {
+module.exports.getAllHotels = async (req, res) => {
     try {
         const hotel = await Hotel.find()
         res.status(200).json(hotel)
@@ -48,7 +48,7 @@ const getAllHotels = async (req, res) => {
     }
 }
 
-const countByCity = async (req, res) => {
+module.exports.countByCity = async (req, res) => {
     const cities = req.query.cities.split(",");
 
     try {
@@ -62,7 +62,7 @@ const countByCity = async (req, res) => {
     }
 }
 
-const countByType = async (req, res) => {
+module.exports.countByType = async (req, res) => {
     try {
         const hotel = await Hotel.find()
         res.status(200).json(hotel)
@@ -70,5 +70,3 @@ const countByType = async (req, res) => {
         res.status(500).json(error)
     }
 }
-
-module.exports = { createHotel, updateHotel, deleteHotel, getHotel, getAllHotels, countByCity, countByType }

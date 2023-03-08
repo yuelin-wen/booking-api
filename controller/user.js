@@ -1,6 +1,6 @@
 const User = require("../models/User")
 
-const createUser = async (req, res, next) => {
+module.exports.createUser = async (req, res, next) => {
     async (req, res) => {
         const newUser = new User(req.body)
         try {
@@ -12,7 +12,7 @@ const createUser = async (req, res, next) => {
     }
 }
 
-const updateUser = async (req, res) => {
+module.exports.updateUser = async (req, res) => {
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
         res.status(200).json(updatedUser)
@@ -21,7 +21,7 @@ const updateUser = async (req, res) => {
     }
 }
 
-const deleteUser = async (req, res) => {
+module.exports.deleteUser = async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id)
         res.status(200).json("deleted User")
@@ -30,7 +30,7 @@ const deleteUser = async (req, res) => {
     }
 }
 
-const getUser = async (req, res) => {
+module.exports.getUser = async (req, res) => {
     try {
         const user = await User.findById(req.params.id)
         res.status(200).json(user)
@@ -39,7 +39,7 @@ const getUser = async (req, res) => {
     }
 }
 
-const getAllUsers = async (req, res) => {
+module.exports.getAllUsers = async (req, res) => {
     try {
         const user = await User.find()
         res.status(200).json(user)
@@ -47,5 +47,3 @@ const getAllUsers = async (req, res) => {
         res.status(500).json(error)
     }
 }
-
-module.exports = {createUser, updateUser, deleteUser, getUser, getAllUsers}
