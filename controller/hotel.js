@@ -48,4 +48,27 @@ const getAllHotels = async (req, res) => {
     }
 }
 
-module.exports = {createHotel, updateHotel, deleteHotel, getHotel, getAllHotels}
+const countByCity = async (req, res) => {
+    const cities = req.query.cities.split(",");
+
+    try {
+        const list = await Promise.all(cities.map(city => {
+            // return Hotel.find({city:city}).length
+            return Hotel.countDocuments({ city: city })
+        }))
+        res.status(200).json(list)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
+const countByType = async (req, res) => {
+    try {
+        const hotel = await Hotel.find()
+        res.status(200).json(hotel)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
+module.exports = { createHotel, updateHotel, deleteHotel, getHotel, getAllHotels, countByCity, countByType }
